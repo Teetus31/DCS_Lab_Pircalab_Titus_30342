@@ -7,9 +7,9 @@ import java.util.StringTokenizer;
 public class HttpServer extends Thread
 {
 	//standard port
-	private final static int PORT = 80;
+	private final static int PORT = 8080;
 	
-	private final String iniContext="C:\\Coding\\GitHub Repositories\\DCS_Network_Programming\\Labnet\\src\\lab\\scd\\net\\httpexample";
+	private final String iniContext="/home/titus/Code/java/DCS_Lab_Pircalab_Titus_30342/1/DCS_Network_Programming-main/Labnet/src/lab/scd/net/httpexample";
 	private boolean alive;
 	
 	private ServerSocket ss;
@@ -74,6 +74,7 @@ class ProcesRequest extends Thread
 			if(request.lastIndexOf("GET")==0) fileName = interpretGET(request);
 			else throw new Exception("BAU");
 			byte[] data = readFile(fileName);
+			dout.writeBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nContent-Length: " + data.length + "\r\n\r\n");
 			dout.write(data);
 			dout.flush();
 					
